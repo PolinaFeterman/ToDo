@@ -19,33 +19,29 @@ export default {
     components: {
         TodoList,
     },
-    // data function provides data to the template
     data() {
         return {
             todos: [],
         };
     },
     methods: {
-        changeToDoEditMode(todoId, mode) {
+        // get todo by id, change propert and save
+        changeToDoProperty(todoId, property, value) {
             const todo = this.todos.find((t) => t.id === todoId);
             if (todo) {
-                todo.editMode = mode;
-            }
-        },
-        changeToDoStatus(todoId, status) {
-            const todo = this.todos.find((t) => t.id === todoId);
-            if (todo) {
-                todo.completed = status;
+                todo[property] = value;
             }
             ToDoApi.saveToDoList(this.todos);
         },
+        // put todo in edit mode and save
         onEditTodo(todoId) {
-            this.changeToDoEditMode(todoId, true);
+            this.changeToDoProperty(todoId, 'editMode', true);
         },
+        // put todo in regular mode and save
         onSaveTodo(todoId) {
-            this.changeToDoEditMode(todoId, false);
-            ToDoApi.saveToDoList(this.todos);
+            this.changeToDoProperty(todoId, 'editMode', false);
         },
+        // delete todo and save
         onDeleteTodo(todoId) {
             const todoIndex = this.todos.findIndex((t) => {
                 return t.id === todoId;
@@ -55,19 +51,20 @@ export default {
             }
             ToDoApi.saveToDoList(this.todos);
         },
+        //add new todo
         onAddTodo() {
             this.todos.unshift(new ToDo());
         },
+        // put todo in completed mode and save
         onCompleteTodo(todoId) {
-            this.changeToDoStatus(todoId, true);
-            ToDoApi.saveToDoList(this.todos);
+            this.changeToDoProperty(todoId, 'completed', true);
         },
+        // reactivate todo and save
         onReactivateToDo(todoId) {
-            this.changeToDoStatus(todoId, false);
-
-            ToDoApi.saveToDoList(this.todos);
+            this.changeToDoProperty(todoId, 'completed', false);
         },
     },
+    // get all todos from local storage
     mounted() {
         this.todos = ToDoApi.getToDoList();
     },
