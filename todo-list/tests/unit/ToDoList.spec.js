@@ -60,7 +60,7 @@ describe('ToDoList.vue', () => {
             vuetify,
             propsData: { todos },
         });
-        
+
         const activeTodos = [
             {
                 title: 'todo 1',
@@ -72,24 +72,30 @@ describe('ToDoList.vue', () => {
         ];
         await wrapper.setData({ filterTodos: 1 });
         await wrapper.vm.$nextTick();
-        expect(JSON.stringify(wrapper.vm.filteredTodos)).to.equal(JSON.stringify(activeTodos));
-        const completedToDos = [{
-            title: 'todo 2',
-            completed: true,
-            editMode: false,
-            text: 'text2',
-            id: 2,
-        },
-        {
-            title: 'todo 3',
-            completed: true,
-            editMode: false,
-            text: 'text3',
-            id: 2,
-        },];
+        expect(JSON.stringify(wrapper.vm.filteredTodos)).to.equal(
+            JSON.stringify(activeTodos)
+        );
+        const completedToDos = [
+            {
+                title: 'todo 2',
+                completed: true,
+                editMode: false,
+                text: 'text2',
+                id: 2,
+            },
+            {
+                title: 'todo 3',
+                completed: true,
+                editMode: false,
+                text: 'text3',
+                id: 2,
+            },
+        ];
         await wrapper.setData({ filterTodos: 2 });
         await wrapper.vm.$nextTick();
-        expect(JSON.stringify(wrapper.vm.filteredTodos)).to.equal(JSON.stringify(completedToDos));
+        expect(JSON.stringify(wrapper.vm.filteredTodos)).to.equal(
+            JSON.stringify(completedToDos)
+        );
         await wrapper.setData({ filterTodos: 0 });
         await wrapper.vm.$nextTick();
         expect(JSON.stringify(wrapper.vm.filteredTodos)).to.equal(

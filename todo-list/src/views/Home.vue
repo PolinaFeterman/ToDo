@@ -64,7 +64,7 @@ export default {
         },
         onReactivateToDo(todoId) {
             this.changeToDoStatus(todoId, false);
-            
+
             ToDoApi.saveToDoList(this.todos);
         },
     },
