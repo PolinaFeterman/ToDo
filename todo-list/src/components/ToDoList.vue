@@ -72,7 +72,7 @@
                     rounded
                     color="blue-grey darken-3"
                     class="mr-1"
-                    @click="formerPage"
+                    @click="prevPage"
                 >
                     <v-icon>mdi-chevron-left</v-icon>
                 </v-btn>
@@ -115,17 +115,22 @@ export default {
         };
     },
     computed: {
+        // filter todos according to selected filter
         filteredTodos() {
             switch (this.filterTodos) {
+                // show active
                 case 1: {
                     return this.todos.filter((t) => t.completed === false);
                 }
+                // show completed
                 case 2: {
                     return this.todos.filter((t) => t.completed !== false);
                 }
             }
+            // show all
             return this.todos;
         },
+        // calculate number of pages
         numberOfPages() {
             return Math.ceil(this.todos.length / this.ipp);
         },
@@ -148,8 +153,7 @@ export default {
             return 1;
         },
         ipp: {
-            set(val) {
-                console.log(val);
+            set() {
             },
             get() {
                 return Math.ceil(this.rowsPerPage * this.itemsPerRow);
@@ -178,7 +182,7 @@ export default {
         nextPage() {
             if (this.page + 1 <= this.numberOfPages) this.page += 1;
         },
-        formerPage() {
+        prevPage() {
             if (this.page - 1 >= 1) this.page -= 1;
         },
         calcRowsPerPage() {

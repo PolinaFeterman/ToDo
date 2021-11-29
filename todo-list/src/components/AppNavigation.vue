@@ -1,6 +1,6 @@
 <template>
     <span>
-        <v-toolbar app color="blue-grey darken-1" dark>
+        <v-app-bar dense color="blue-grey darken-1" dark>
             <v-btn
                 text
                 class="hidden-sm-and-down blue-grey darken-2 px-2"
@@ -14,7 +14,7 @@
                 to="/about"
                 >About</v-btn
             >
-        </v-toolbar>
+        </v-app-bar>
     </span>
 </template>
 
