@@ -25,7 +25,7 @@ export default {
         };
     },
     methods: {
-        // get todo by id, change propert and save
+        // get todo by id, change property and save
         changeToDoProperty(todoId, property, value) {
             const todo = this.todos.find((t) => t.id === todoId);
             if (todo) {

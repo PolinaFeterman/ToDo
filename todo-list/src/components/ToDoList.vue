@@ -185,6 +185,8 @@ export default {
         prevPage() {
             if (this.page - 1 >= 1) this.page -= 1;
         },
+
+        // calculate rows per page based on viewport
         calcRowsPerPage() {
             let minItemHeight = 180;
             const viewport = window.visualViewport;
@@ -197,10 +199,10 @@ export default {
             );
         },
     },
+    // calculate initial rows per page and listen to resize event to recalculate rows per page
     mounted() {
         this.calcRowsPerPage();
         window.addEventListener('resize', () => {
-            //debounce
             if (!this.busy) {
                 this.busy = true;
                 setTimeout(() => {
